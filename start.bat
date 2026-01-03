@@ -1,50 +1,38 @@
 @echo off
-chcp 65001 >nul
-title 🚀 ZLF PlayerOk Checker v2.0
+chcp 65001 > nul
+title PlayerOk Token Checker v2.1
+color 0A
+cls
 
+echo ════════════════════════════════════════════════
+echo        PLAYEROK TOKEN CHECKER v2.1
+echo        Разработано ZLF Team
+echo ════════════════════════════════════════════════
 echo.
-echo     ╔══════════════════════════════════════════════════════════╗
-echo     ║                                                          ║
-echo     ║                  🚀 ZLF PLAYEROK CHECKER                 ║
-echo     ║                     Версия 2.0                           ║
-echo     ║                                                          ║
-echo     ╚══════════════════════════════════════════════════════════╝
-echo.
-echo        📦 playerokapi от: alleexxeeyy
-echo        🌐 Портфолио: https://zlafik1.github.io/zlafikbio/
-echo.
-echo        📅 %date% %time%
-echo.
-timeout /t 2 /nobreak >nul
 
-python --version >nul 2>&1
+echo [i] Проверка Python...
+python --version > nul 2>&1
 if errorlevel 1 (
-    echo.
-    echo    ❗ Python не найден! Установите Python 3.7+
-    echo    📥 Скачать: https://www.python.org/downloads/
-    echo.
+    echo [-] Ошибка: Python не найден!
+    echo [i] Установите Python 3.8+ с python.org
     pause
-    exit /b 1
+    exit
 )
 
-python -c "import playerokapi" >nul 2>&1
+echo [i] Проверка зависимостей...
+python -c "import curl_cffi" 2>nul
 if errorlevel 1 (
-    echo.
-    echo    ⚠  playerokapi не установлен
-    echo    📦 Устанавливаю библиотеку...
-    pip install playerokapi --quiet
-    echo    ✅ playerokapi установлен
+    echo [i] Установка curl-cffi...
+    pip install curl-cffi --quiet --disable-pip-version-check
+    echo [+] Зависимости установлены
 )
 
+echo [+] Все готово!
+echo [i] Запуск программы...
 echo.
-echo    🚀 Запуск программы...
-echo.
-timeout /t 1 /nobreak >nul
 
 python bot.py
 
 echo.
-echo    📊 Программа завершена
-echo    🕐 Время работы: %time%
-echo.
+echo ════════════════════════════════════════════════
 pause
